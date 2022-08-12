@@ -1,6 +1,9 @@
 from datetime import timezone
 
-from rest_framework import generics
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import generics, viewsets
+from rest_framework.filters import SearchFilter
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from .models import *
@@ -9,6 +12,7 @@ from django.utils import timezone
 from django.shortcuts import render
 
 class ProviderAPIView(APIView):
+    permission_classes = (IsAuthenticated,)
     def get(self, request):
         lst = provider.objects.all()
         return Response({'posts': ProviderAPIViewSerializer(lst, many=True).data})
@@ -28,11 +32,12 @@ class ProviderAPIView(APIView):
         return Response({'deleted' : ProviderAPIViewSerializer(postToDel).data})
 
 
-class ListOfCarsAPIView(generics.ListCreateAPIView):
+class ListOfCarsViewSet(viewsets.ModelViewSet):
     queryset = listOfCars.objects.all()
     serializer_class=ListOfCarsAPIViewSerializer
+    filter_backends = [DjangoFilterBackend,SearchFilter]
+    filterset_fields = ['price']
+    search_fields = ['model', 'mark']
+    permission_classes = (IsAuthenticated,)
 
-class ListOfCarsAPIViewDelete(generics.DestroyAPIView):
-    queryset = listOfCars.objects.all()
-    serializer_class = ListOfCarsAPIViewSerializer
 
