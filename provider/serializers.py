@@ -8,7 +8,7 @@ class ProviderAPIViewSerializer(serializers.Serializer):
     ammountOfBuyers = serializers.IntegerField()
     providerId = serializers.IntegerField()
 
-class ListOfCarsAPIViewSerializer(serializers.Serializer):
+class ListOfCarsAPIViewSerializer(serializers.ModelSerializer):
     class Meta:
         model=listOfCars
         fields =('id',"engine_type","max_speed","ammount_of_eng","model","mark","price","providerId",)

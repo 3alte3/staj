@@ -27,6 +27,7 @@ class cars(models.Model):
     mark = models.CharField(max_length=255)
     price = models.IntegerField()
     showroom_id =models.IntegerField()
+    ammount_of_cars = models.IntegerField(null=True)
     isActive = models.BooleanField(default=True)
 
 class history(models.Model):
@@ -39,6 +40,7 @@ class history(models.Model):
 class unique_buyers(models.Model):
     buyer_id= models.IntegerField()
     showroom_id = models.IntegerField()
+    amount_of_purchase = models.IntegerField(null=True)
     isActive = models.BooleanField(default=True)
 
 
