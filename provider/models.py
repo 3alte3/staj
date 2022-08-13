@@ -16,3 +16,12 @@ class listOfCars(models.Model):
     price = models.IntegerField()
     providerId = models.IntegerField()
     isActive = models.BooleanField(default=True)
+
+class providerHistory(models.Model):
+    date = models.DateTimeField()
+    providerId = models.IntegerField()
+    showroom_id = models.IntegerField()
+    model = models.CharField(max_length=255)
+    mark = models.CharField(max_length=255)
+
+
