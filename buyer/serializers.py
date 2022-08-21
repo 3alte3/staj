@@ -4,12 +4,11 @@ from .models import *
 
 class BuyerAPIViewSerializer(serializers.ModelSerializer):
     class Meta:
-        model=buyer
-        fields = ('id','name','surname','email','phoneNumber','buyerId','balance',)
+        model=Buyer
+        fields = ('id','name','surname','email','phoneNumber','balance',)
 
 
-class BuyerHistoryAPIViewSerializer(serializers.Serializer):
-    buyerId = serializers.CharField(max_length=255)
-    date = serializers.DateTimeField()
-    price = serializers.IntegerField()
-    showroom_id = serializers.IntegerField()
+class BuyerHistoryAPIViewSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = BuyerHistory
+        fields = ('id','buyer','date','price','showroom')
